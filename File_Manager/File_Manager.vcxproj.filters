@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Main.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Asm_Tools_Interface.h">
+      <Filter>Asm_Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Commander.h">
+      <Filter>Commander</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Panel.h">
+      <Filter>Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Commander.cpp">
+      <Filter>Commander</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Main">
+      <UniqueIdentifier>{46e620ea-f063-43e1-a037-2d546109e307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Asm_Tools">
+      <UniqueIdentifier>{f0767370-8461-48fa-bf4c-32085f81697d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commander">
+      <UniqueIdentifier>{607e76a3-aa45-43cd-9060-21bbd9ad7bbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{da565987-208b-42c2-bf47-1053aee32eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Panel">
+      <UniqueIdentifier>{f4118b5c-e8ac-4f2b-a7cc-3199465064ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{5298fdc0-beca-4121-adfd-ebe1ddebc27b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="Asm_Tools.asm">
+      <Filter>Asm_Tools</Filter>
+    </MASM>
+  </ItemGroup>
+</Project>
