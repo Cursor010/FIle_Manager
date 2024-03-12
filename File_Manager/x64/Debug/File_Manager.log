@@ -1,7 +1,8 @@
-﻿  Commander.cpp
+﻿  Assembling Asm_Tools.asm...
+  Commander.cpp
   Common.cpp
   Main.cpp
   Menu.cpp
   Panel.cpp
   Generating Code...
-  File_Manager.vcxproj -> C:\Projects_C++\File_Manager2\File_Manager\x64\Debug\File_Manager.exe
+  File_Manager.vcxproj -> C:\Projects_C++\File_Manager\FIle_Manager\x64\Debug\File_Manager.exe
