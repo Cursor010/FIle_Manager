@@ -16,6 +16,7 @@ The project is a financial manager who knows how to work with basic file operati
 
 ## Screenshots:
 ![program interface](https://github.com/Cursor010/FIle_Manager/tree/main/screenshots/ProgramIntarface.png)
+<img src="https://github.com/Cursor010/FIle_Manager/tree/main/screenshots/ProgramIntarface.png" />
 ![changing panel](https://github.com/Cursor010/FIle_Manager/tree/main/screenshots/ChangingPanel.png)
 ![cutting file](https://github.com/Cursor010/FIle_Manager/tree/main/screenshots/CuttingFile.png)
 ![deleting file](https://github.com/Cursor010/FIle_Manager/tree/main/screenshots/DeletingFile.png)
