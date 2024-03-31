@@ -1,4 +1,4 @@
-﻿#include "Panel.h"
+#include "Panel.h"
 
 // APanel
 //------------------------------------------------------------------------------------------------------------
@@ -12,7 +12,9 @@ APanel::APanel(unsigned short x_pos, unsigned short y_pos, unsigned short width,
 }
 //------------------------------------------------------------------------------------------------------------
 std::wstring APanel::transfer_file_name_;
-std::wstring APanel::existing_file_path_;
+std::wstring APanel::existing_path_transf;
+std::wstring APanel::copy_file_name_;
+std::wstring APanel::existing_path_copy;
 //------------------------------------------------------------------------------------------------------------
 void APanel::update()
 {// Updating the panel
@@ -283,7 +285,11 @@ void APanel::displaySingleFile(AFile_Descriptor* file, const unsigned short x_of
 {// Display one file
 	unsigned short attributes{};
 
-	if (existing_file_path_ == current_directory_ + L"\\" + file->file_name_)
+	if (existing_path_transf == current_directory_ + L"\\" + file->file_name_)
+	{
+		attributes = bg_attribute | 0x06;
+	}
+	else if (existing_path_copy == current_directory_ + L"\\" + file->file_name_)
 	{
 		attributes = bg_attribute | 0x06;
 	}
@@ -413,7 +419,7 @@ bool APanel::transferSelectedFile(const bool transfer_mode)
 		if (file_descriptor_->attributes_ != FILE_ATTRIBUTE_DIRECTORY && !transfer_mode && massage_box_->showMessageBox(L"Transfer", L"Do you want to cut file " + file_descriptor_->file_name_ + L"?"))
 		{
 			transfer_file_name_ = file_descriptor_->file_name_;
-			existing_file_path_ = (current_directory_ + L"\\" + transfer_file_name_);
+			existing_path_transf = (current_directory_ + L"\\" + transfer_file_name_);
 
 			files_.erase(files_.begin() + curr_file_index_);
 
@@ -427,9 +433,9 @@ bool APanel::transferSelectedFile(const bool transfer_mode)
 		else if (transfer_mode && massage_box_->showMessageBox(L"Transfer", L"Do you want to insert file " + transfer_file_name_ + L"?"))
 		{
 			std::wstring new_file_path = (current_directory_ + L"\\" + transfer_file_name_);
-			if (MoveFile(existing_file_path_.c_str(), new_file_path.c_str()))
+			if (MoveFile(existing_path_transf.c_str(), new_file_path.c_str()))
 			{
-				existing_file_path_.clear();
+				existing_path_transf.clear();
 				return true;
 			}
 		}
@@ -437,6 +443,59 @@ bool APanel::transferSelectedFile(const bool transfer_mode)
 	catch (const std::exception& e)
 	{
 		std::cerr << "Error in APanel::transferSelectedFile: " << e.what() << std::endl;
+	}
+
+	return false;
+}
+//------------------------------------------------------------------------------------------------------------
+bool APanel::copySelectedFile(const bool copy_mode)
+{// Copy file/Paste file
+	try
+	{
+		file_descriptor_ = std::make_unique<AFile_Descriptor>(*files_[curr_file_index_]);
+
+		if (file_descriptor_->attributes_ != FILE_ATTRIBUTE_DIRECTORY && !copy_mode && massage_box_->showMessageBox(L"Copy", L"Do you want to copy file " + file_descriptor_->file_name_ + L"?"))
+		{
+			copy_file_name_ = file_descriptor_->file_name_;
+			existing_path_copy = current_directory_ + L"\\" + copy_file_name_;
+
+			files_.erase(files_.begin() + curr_file_index_);
+
+			if (number_files_ == curr_file_index_)
+			{
+				changeSelectedFilePosition(EMoveDirection::UP);
+			}
+
+			return true;
+		}
+		else if (copy_mode && massage_box_->showMessageBox(L"Copy", L"Do you want to insert file " + copy_file_name_ + L"?"))
+		{
+			std::wstring new_file_path = current_directory_ + L"\\" + copy_file_name_;
+
+			if (std::filesystem::exists(existing_path_copy)) 
+			{
+				if (std::filesystem::is_regular_file(existing_path_copy)) 
+				{
+					std::string fileName = std::filesystem::path(existing_path_copy).filename().string();
+
+					std::string destinationPath;
+
+					destinationPath.assign(current_directory_.begin(), current_directory_.end());
+
+					destinationPath += "\\" + fileName;
+
+					std::filesystem::copy_file(existing_path_copy, destinationPath, std::filesystem::copy_options::update_existing);
+
+					existing_path_copy.clear();
+
+					return true;
+				}
+			}
+		}
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "Error in APanel::copySelectedFile: " << e.what() << std::endl;
 	}
 
 	return false;
