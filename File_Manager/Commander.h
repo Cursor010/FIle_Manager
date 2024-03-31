@@ -24,6 +24,7 @@ private:
 	bool can_run_ = true;
 	bool need_redraw_ = true;
 	bool transfer_mode_ = false;
+	bool copy_mode_ = false;
 
 	unsigned short last_time_min_{};
 	unsigned short screen_half_width_{};
