@@ -142,7 +142,7 @@ void AsCommander::buildMenu()
 	unsigned short x_pos{};
 	const unsigned short x_step = screen_buffer_info_.dwSize.X / 12;
 
-	const wchar_t* MENU_ITEMS[] = { L"Help", L"UserMenu", L"View", L"Edit", L"Transfer", L"RenMov", L"MakeDir", L"Delete", L"Config", L"Quit", L"Plugin", L"Screen" };
+	const wchar_t* MENU_ITEMS[] = { L"Help", L"Copy", L"View", L"Edit", L"Transfer", L"RenMov", L"MakeDir", L"Delete", L"Config", L"Quit", L"Plugin", L"Screen" };
 	const wchar_t* MENU_ITEM_NUMBER[] = { L"1", L" 2", L" 3", L" 4", L" 5", L" 6", L" 7", L" 8", L" 9", L" 10" , L" 11", L" 12" };
 
 	for (size_t i = 0; i < sizeof(MENU_ITEMS); ++i)
@@ -223,6 +223,16 @@ void AsCommander::checkHandleInput(INPUT_RECORD& input_record, unsigned long& re
 							right_panel_->getDirectoryFiles(EGetFilesMode::UPDATE);
 
 							transfer_mode_ = !transfer_mode_;
+						}
+						break;
+						
+					case 0x71: // F2
+						if (active_panel_->copySelectedFile(copy_mode_))
+						{
+							left_panel_->getDirectoryFiles(EGetFilesMode::UPDATE);
+							right_panel_->getDirectoryFiles(EGetFilesMode::UPDATE);
+
+							copy_mode_ = !copy_mode_;
 						}
 						break;
 
