@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma once
-
 #include <windows.h>
 #include <string>
 #include <vector>
@@ -9,7 +7,7 @@
 #include <filesystem>
 #include <sstream>
 #include <iomanip>
-
+ 
 #include "Asm_Tools_Interface.h"
 
 //------------------------------------------------------------------------------------------------------------
@@ -21,9 +19,11 @@ public:
 	void onEnter();
 	void getDirectoryFiles(EGetFilesMode get_files_mode);
 	void changeSelectedFilePosition(EMoveDirection move_direction);
+	void setDirectoryHighlight(unsigned short directory_highlight);
+
 	bool deleteSelectedFile();
 	bool transferSelectedFile(const bool transfer_mode);
-	void setDirectoryHighlight(unsigned short directory_highlight);
+	bool copySelectedFile(const bool copy_mode);
 
 private:
 	void displayPanel() const;
@@ -51,7 +51,9 @@ private:
 	std::wstring current_directory_{};
 
 	static std::wstring transfer_file_name_;
-	static std::wstring existing_file_path_;
+	static std::wstring existing_path_transf;
+	static std::wstring copy_file_name_;
+	static std::wstring existing_path_copy;
 
 	std::unique_ptr<CHAR_INFO[]> screen_buffer_;
 	std::unique_ptr<AFile_Descriptor> file_descriptor_;
