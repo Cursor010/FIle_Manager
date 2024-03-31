@@ -42,7 +42,7 @@ The project is a financial manager who knows how to work with basic file operati
 + A — move to the left/to the beginning;
 + S — move down;
 + D — move to the right/to the end;
-+ F2 - copying the file (at a low level, the file is copy, when the file is re-inserted along the selected path);
++ F2 — copying the file (at a low level, the file is copy, when the file is re-inserted along the selected path);
 + F5 — cutting the file (at a low level, the file is cut, when the file is re-inserted along the selected path);
 + F8 — deleting the file/folder/archive;
 + F10 — exit the program;
